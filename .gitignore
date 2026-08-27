@@ -1,0 +1,11 @@
+# Node
+node_modules/
+npm-debug.log*
+
+# env / secrets
+.env
+*.local
+
+# OS
+.DS_Store
+Thumbs.db

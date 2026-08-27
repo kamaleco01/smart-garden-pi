@@ -1,0 +1,10 @@
+{
+  "name": "smart-garden-pi",
+  "version": "1.0.0",
+  "description": "Remote dashboard for the ESP32 Smart Garden watering system. Pure Node, no dependencies.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "license": "MIT"
+}
