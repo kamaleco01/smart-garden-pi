@@ -41,6 +41,7 @@ let state = {
 };
 
 let pendingCommands = [];   // commands waiting for the ESP to poll
+let lastPumpCmdAt = 0;      // when the dashboard last issued a pump command
 
 // --- gentle demo simulation (only while no real ESP is posting) ---
 setInterval(() => {
@@ -80,7 +81,9 @@ const server = http.createServer(async (req, res) => {
     const b = await readBody(req);
     if (typeof b.moisture === 'number') state.moisture = b.moisture;
     if (typeof b.water === 'boolean') state.water = b.water;
-    if (typeof b.pump === 'boolean') state.pump = b.pump;
+    // ignore the ESP's pump value for a few seconds after a dashboard command,
+    // so the button doesn't flicker back before the ESP has applied it
+    if (typeof b.pump === 'boolean' && Date.now() - lastPumpCmdAt > 8000) state.pump = b.pump;
     if (typeof b.auto === 'boolean') state.auto = b.auto;
     if (typeof b.plant === 'number') state.plant = b.plant;
     state.lastSeen = Date.now();
@@ -116,6 +119,7 @@ const server = http.createServer(async (req, res) => {
       const on = b.value === 'on';
       if (on && state.water) state.pump = true;
       if (!on) state.pump = false;
+      lastPumpCmdAt = Date.now();
       pendingCommands.push({ type: 'pump', value: on ? 'on' : 'off' });
     } else if (b.action === 'plant' && typeof b.value === 'number') {
       if (b.value >= 0 && b.value < PLANTS.length) {
