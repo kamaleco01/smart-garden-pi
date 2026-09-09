@@ -23,12 +23,9 @@ const SIMULATE = process.env.SIMULATE !== '0';  // demo data when no real ESP
 
 // Plant profiles - keep these matched to the ESP sketch.
 const PLANTS = [
-  { name: 'Cactus / Succulent',     threshold: 15, seconds: 3 },
-  { name: 'Herbs (Basil, Mint)',    threshold: 35, seconds: 5 },
-  { name: 'Tomato / Vegetable',     threshold: 45, seconds: 8 },
-  { name: 'Leafy Greens (Lettuce)', threshold: 55, seconds: 8 },
-  { name: 'Flowering Ornamental',   threshold: 40, seconds: 6 },
-  { name: 'Tropical / Fern',        threshold: 60, seconds: 10 },
+  { name: 'Mustard Greens (Sawi)', threshold: 55, seconds: 5 },
+  { name: 'Chili (Cili)',          threshold: 38, seconds: 4 },
+  { name: 'Aloe Vera',             threshold: 20, seconds: 3 },
 ];
 
 let state = {
@@ -36,7 +33,7 @@ let state = {
   water: true,
   pump: false,
   auto: true,
-  plant: 2,
+  plant: 0,
   lastSeen: 0,      // ms timestamp of last real ESP reading
 };
 
