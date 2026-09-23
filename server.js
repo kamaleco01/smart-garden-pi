@@ -25,6 +25,7 @@ const SIMULATE = process.env.SIMULATE !== '0';  // demo data when no real ESP
 const PLANTS = [
   { name: 'Mustard Greens (Sawi)', threshold: 55, seconds: 5 },
   { name: 'Chili (Cili)',          threshold: 38, seconds: 4 },
+  { name: 'Bunga Butang',          threshold: 35, seconds: 4 },
   { name: 'Aloe Vera',             threshold: 20, seconds: 3 },
 ];
 
